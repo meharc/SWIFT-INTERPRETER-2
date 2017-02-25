@@ -1,0 +1,5 @@
+import sys
+from mylexer import *
+
+text=raw_input("\nPRESS ENTER TO EXIT\n")
+tokenize(text,patterns) 
