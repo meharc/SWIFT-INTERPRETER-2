@@ -1,0 +1,39 @@
+import re
+
+KEY,OP,IDENT,NUM='KEYWORD','OPERATOR','IDENTIFIER','NUMBER'
+
+patterns=[
+                (r'[\s\n\t]' , None),
+                (r'var', KEY),
+                (r'int', KEY),
+                (r'let',KEY),
+                (r'float', KEY),
+                (r'if',KEY),
+                (r'else',KEY),
+                (r'\+',OP),
+                (r'\-',OP),
+                (r'\%',OP),
+                (r'\/',OP),
+                (r'\*',OP),
+                (r'[a-zA-Z][a-zA-Z0-9_]*',IDENT),
+                (r'[\d.\d]+',NUM),
+                (r'[0-9]+',NUM),
+         ]
+
+def tokenize(text,patterns):
+        pos=0
+        result=None
+        while pos<len(text):
+            for pat in patterns:
+              pattern,defintion=pat
+              prog=re.compile(pattern)
+              result=prog.match(text,pos)
+              if result:
+                    tok=result.group(0)
+                    print(tok)
+                    print(defintion)
+                    break
+            if not result:
+                  print('invalid character')
+                  break
+            pos=result.end(0)   
